@@ -1,6 +1,6 @@
 import java.lang.*;
 import java.util.Scanner;
-/*UVA: 455 - Periodic Strings  */
+                                    /*UVA: 455 - Periodic Strings  */
 public class UVA455PeriodicStrings {
 
     public void answer(){
