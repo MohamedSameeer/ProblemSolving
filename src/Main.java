@@ -1,6 +1,6 @@
 public class Main {
     public static void main (String[] args) {
-        UVA11965ExtraSpaces ans=new UVA11965ExtraSpaces();
+        UVA11220DecodingTheMessage ans=new UVA11220DecodingTheMessage();
         ans.answer();
 
     }
