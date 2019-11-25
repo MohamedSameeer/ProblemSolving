@@ -1,0 +1,20 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+int main() {
+	int t;
+	scanf("%d",&t);
+	while(t--){
+		string st;
+		cin>>st;
+		sort(st.begin(),st.end());
+		cout<<st<<endl;
+		while( next_permutation(st.begin(), st.end()) ){
+			  cout<<st<<endl;
+		}
+		cout<<endl;
+	}
+
+	return 0;
+}
