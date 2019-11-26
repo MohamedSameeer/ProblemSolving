@@ -1,0 +1,56 @@
+#include <iostream>
+#include <deque>
+
+using namespace std;
+
+int main(){
+
+  int t;
+  cin>>t;
+  while(t--){
+    int n,m,x;
+    cin>>n>>m;
+    pair<int,int> arr[n];
+    deque <pair<int,int>>q;
+    for (int i=0;i<n;i++) {
+        cin>>x;
+        q.push_back(make_pair(x,i));
+    }
+
+    int count=1;
+    while(!q.empty()){
+    	//pair<int,int> pre=q.front();
+    	//int preIndex=0;
+
+    	bool isSorted=true;
+	    for(int i=1;i<q.size();i++){
+	        if(q.at(i).first>q.front().first){
+	            pair<int,int> z=q.front();
+	            //q.erase(q.begin()+preIndex);
+	            q.pop_front();
+	            q.push_back(z);
+	            //pre=q.at(i-1);
+	            //preIndex=i-1;
+	            isSorted=false;
+	        }
+	    }
+	    if(isSorted){
+	    	arr[count]=q.front();
+	    	q.pop_front();
+	    	count++;
+	    }
+
+    }
+
+
+
+	for(int i=1;i<count;i++){
+		if(m==arr[i].second){
+			cout<<i<<endl;
+			break;
+		}
+	}
+  }
+
+   return 0;
+}
