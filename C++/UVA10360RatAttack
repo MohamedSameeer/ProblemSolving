@@ -1,0 +1,68 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+
+	while(t--){
+		int d,n,mxX=-1,mxY=-1;
+
+		int arr[1025][1025]={0};
+		cin>>d>>n;
+		for(int i=1;i<=n;i++){
+			int row,column,z;
+			cin>>row>>column>>z;
+			if(row>mxX){
+				mxX=row+d;
+			}
+			if(column>mxY){
+				mxY=column+d;
+			}
+			for(int j=0;j<=d;j++){
+				for(int k=0;k<=d;k++){
+					if(j==k&&j==0){
+						arr[row][column]+=z;
+						continue;
+					}
+					if(row+j<1024){
+						if(column+k<1024)
+							arr[row+j][column+k]+=z;
+						if(k!=0){
+							if(column-k>=0)
+								arr[row+j][column-k]+=z;
+						}
+					}
+					if(j!=0){
+						if(row-j>=0){
+							if(column+k<1024)
+								arr[row-j][column+k]+=z;
+							if(k!=0){
+								if(column-k>=0)
+									arr[row-j][column-k]+=z;
+							}
+						}
+					}
+				}
+			}
+
+		}
+		int max=-1,maxY=0,maxX=0;
+		for(int i=0;i<1024;i++){
+			for(int j=0;j<1024;j++){
+		//	cout<<arr[i][j]<<" ";
+				if(arr[i][j]>max){
+					max=arr[i][j];
+					maxY=i;maxX=j;
+				}
+
+			}
+			//cout<<endl;
+		}//cout<<arr[76][24]<<" "<<arr[24][76]<<endl;
+		cout<<maxY<<" "<<maxX<<" "<<max<<endl;
+	}
+
+	return 0;
+}
+	
