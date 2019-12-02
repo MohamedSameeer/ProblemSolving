@@ -1,0 +1,122 @@
+#include <iostream>
+#include <sstream>
+#include <utility>
+#include <vector>
+#include <deque>
+#include <bits/stdc++.h>
+
+using namespace std;
+pair<int,int>fls;
+int freq[1009];
+vector<deque<int>> v;
+int binarySearch(int arr[],pair<int,int>loc[],int st, int end,int num);
+int binarySearch(int arr[],int st, int end,int num);
+int upperBound(deque<int> q,int st, int end,int num);
+int main() {
+	int w=1;
+  while(true){
+	  int t,q=0,counter;
+	  cin>>t;
+	  //int sz[t];
+	  int arr[1000009];
+      pair<int,int> location[1000009];
+	  if(t==0)break;
+	  cout<<"Scenario #"<<w<<endl;
+	  w++;
+	  if(freq[0]==0){
+	  	freq.clear();
+	  	v.clear();
+	  }
+	  for(int i=1,first=1,count=1,last;i<=t;i++) {
+          int x;
+          cin>>x;
+          last=first+x-1;
+          for(int j=0;j<x;j++){
+            cin>>arr[count];
+            location[count].first=first;
+            location[count].second=last;
+            count++;
+          }
+          first=last+1;
+          counter=count;
+	  }
+
+	  string st;
+	  getline(cin,st);
+	  getline(cin,st);
+//cout<<st;
+	  while(st!="STOP"){
+	  	int size=st.size();
+	  	if(st[0]=='E'){
+	  			string s="";
+	  			for(int i=8;i<size;i++){
+	  				s+=st[i];
+	  			}
+	  			stringstream num(s);
+	  			int val=0;
+	  			num>>val;
+          int loc=binarySearch(arr,location,1,counter-1,val);
+          int pos=binarySearch(freq,0,freq.size(),loc);
+					if(pos!=-1){
+						v[pos].push_back(val);
+					}else{
+
+					}
+	  	getline(cin,st);
+	  }
+	  cout<<endl;
+	}
+  return 0;
+}
+int binarySearch(int arr[],pair<int,int> loc[],int st, int end,int num){
+	int key=(st+end)/2;
+
+	if(st>end){
+		return 0;
+	}
+	if(arr[key]>num){
+
+		return binarySearch( arr,loc,st,key-1,num);
+	}else if(arr[key]<num){
+		return binarySearch(arr,loc,key+1,end,num);
+	}else{
+		return loc[key].second;
+	}
+
+}
+int binarySearch(int arr[],int st, int end,int num){
+	int key=(st+end)/2;
+
+	if(st>end){
+		return -1;
+	}
+	if(arr[key]>num){
+
+		return binarySearch( arr,st,key-1,num);
+	}else if(arr[key]<num){
+		return binarySearch(arr,key+1,end,num);
+	}else{
+		return key;
+	}
+
+}
+
+
+int upperBound(deque<int>q,int st, int end,int num){
+	int key=(st+end)/2;
+//	cout<<q.at(key)<<" q "<<num<<endl;
+	if(st>end){
+	//	cout<<"key= "<<key<<" at(key)= "<<q.at(key)<<" num= "<<num<<endl;
+		if(q.at(key)==num)
+			return key;
+		else
+			return -1;
+	}
+	//cout<<"key= "<<arr[key]<<" st= "<<st<<" end= "<<end<<" num= "<<num<<endl;
+	if(q.at(key)>num){
+		return upperBound(q,st,key-1,num);
+	}else if(q.at(key)<=num){
+		return upperBound(q,key+1,end,num);
+	}
+
+}
